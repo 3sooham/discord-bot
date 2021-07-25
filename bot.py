@@ -1,4 +1,5 @@
 # bot.py
+# https://realpython.com/how-to-make-a-discord-bot-python/
 import os
 import random
 from dotenv import load_dotenv
@@ -53,6 +54,8 @@ async def nine_nine(ctx):
 '''
 @bot.command(name='roll_dice', help='Simulates rolling dice.')
 async def roll(ctx, number_of_dice: int,  number_of_sides: int):
+    # _는 또한 어떤 특정값을 무시하기 위한 용도로 사용되기도한다. 값이 필요하지 않거나 사용되지 않는 값을 _에 할당하기만 하면된다.
+    # 이제 그러니까 dice에 str(random.choice(range(1, number_of_sides + 1))을 number_of_dice만큼 반복한 거를 넣는거임
     dice = [
         str(random.choice(range(1, number_of_sides + 1)))
         for _ in range(number_of_dice)
