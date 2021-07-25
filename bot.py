@@ -71,6 +71,7 @@ async def create_channel(ctx, channel_name):
     # discord.utils.get() to ensure that you don’t create a channel with the same name as an existing channel.
     existing_channel = discord.utils.get(guild.channels, name=channel_name)
     if not existing_channel:
+        # await suspends the execution of the surrounding coroutine until the execution of each coroutine has finished.
         await guild.create_text_channel(channel_name)
         await ctx.send('{} 생성됨'.format(channel_name))
 
