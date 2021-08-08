@@ -12,6 +12,8 @@ from bs4 import BeautifulSoup
 import discord
 from discord.ext import commands
 
+from time import sleep
+
 load_dotenv()
 # 봇 토큰임
 TOKEN = os.getenv('DISCORD_TOKEN')
@@ -104,6 +106,18 @@ async def on_ready():
         print(f'{bot.user} is connected to the following guild:')
         print(f'{guild.name}(id: {guild.id})')
 
+# 돌림판
+@bot.command(name='돌림판', help='!돌림판 내용1 내용2 ... 하면 내용중에서 하나 뽑아줌')
+async def wheel(ctx, *values):
+    choice = random.choice(range(0, len(values)))
+    sleep(1)
+    await ctx.send('3')
+    sleep(1)
+    await ctx.send('2')
+    sleep(1)
+    await ctx.send('1')
+    await ctx.send(values[choice])
+
 # op.gg 크롤링으로 롤 티어 불러오기
 # 다음에는 롤 공식 api로 가져와보기
 @bot.command(name='티어')
@@ -123,7 +137,6 @@ async def lol_tier(ctx, *, name):
         rank = soup.select_one(selector + 'div.TierRank').get_text()
 
         if rank.split()[0] == 'Unranked':
-            print('second if')
             await ctx.send(f'{nick} is {rank}')
         else:
             selector += ' div.TierInfo > '
